@@ -85,14 +85,14 @@ class CallbackView(View):
             'rainy_percent_18': rainy_percent_18
         }
 
-        result = render_to_string('blog/text_template/weather.txt', context)
         # dt = datetime.datetime.now()
         # if dt.hour == 14:
         text = event.message.text
         if '天気' in text: 
+            result = render_to_string('blog/text_template/weather.txt', context)
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='result')
+                TextSendMessage(text=result)
             )
 
     # @handler.add(MessageEvent, message=LocationMessage)
