@@ -63,7 +63,6 @@ class CallbackView(View):
         r_data = r.json()
         d = r_data['forecasts']
         maebashi = d[1]['image']['title']
-        emoji = 0x1000AA
         h_temperature = d[1]['temperature']['max']['celsius']
         l_temperature = d[1]['temperature']['min']['celsius']
         rainy_percent_0 = d[1]['chanceOfRain']['00-06']
@@ -76,7 +75,6 @@ class CallbackView(View):
             'r_data': r_data,
             'd': d,
             'maebashi': maebashi,
-            'emoji': emoji,
             'h_temperature': h_temperature,
             'l_temperature': l_temperature,
             'rainy_percent_0': rainy_percent_0,
@@ -85,10 +83,8 @@ class CallbackView(View):
             'rainy_percent_18': rainy_percent_18
         }
 
-        # dt = datetime.datetime.now()
-        # if dt.hour == 14:
-        text = event.message.text
-        if '天気' in text: 
+        dt = datetime.datetime.now()
+        if dt.hour == 21:
             result = render_to_string('blog/text_template/weather.txt', context)
             line_bot_api.reply_message(
                 event.reply_token,
