@@ -11,7 +11,6 @@ from linebot.models import (
     TextMessage,
     TextSendMessage,
 )
-import datetime
 import requests
 import pprint
 import os
@@ -58,7 +57,7 @@ class CallbackView(View):
     #             ]
     #         )
 
-    def handle_message(event):
+    def main():
         r = requests.get('https://weather.tsukumijima.net/api/forecast/city/100010')
         r_data = r.json()
         d = r_data['forecasts']
@@ -83,20 +82,6 @@ class CallbackView(View):
             'rainy_percent_18': rainy_percent_18
         }
 
-        dt = datetime.datetime.now()
-        if dt.hour == 21:
-            result = render_to_string('blog/text_template/weather.txt', context)
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=result)
-            )
-
-    # @handler.add(MessageEvent, message=LocationMessage)
-    # def handle_location(event):
-    #     text = event.message.address
-
-    #     result = sc.get_weather_from_location(text)
-    #     line_bot_api.reply_message(
-    #         event.reply_token,
-    #         TextSendMessage(text=result)
-    #     )
+        result = render_to_string('blog/text_template/weather.txt', context)
+        messages = TextSendMessage(text=result)
+        line_bot_api.broadcast(messages=messages)
