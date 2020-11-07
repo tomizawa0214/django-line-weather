@@ -54,7 +54,7 @@ class CallbackView(View):
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                    TextSendMessage(text='URLをクリックして現在地を教えて\uDBC0\uDC2F'),
+                    TextSendMessage(text='以下のURLから現在地を教えてくださいな\uDBC0\uDC2F'),
                     TextSendMessage(text='https://line.me/R/nv/location/')
                 ]
             )
@@ -96,7 +96,7 @@ class CallbackView(View):
     def handle_location(event):
         text = event.message.address
 
-        result = scrape.get_weather_from_location(text)
+        result = get_weather_from_location(text)
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=result)
