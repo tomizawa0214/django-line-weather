@@ -1,0 +1,6 @@
+-----今日の天気-----
+{{ result_info }}
+
+
+▼現在地
+{{ original_location }}

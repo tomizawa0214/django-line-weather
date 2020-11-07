@@ -69,21 +69,20 @@ class CallbackView(View):
             location = re.findall('\d{3}-\d{4}', original_location)
             # 1回目のスクレイピングでは住所を検索し、候補から取ってくる
             url = "https://weather.yahoo.co.jp/weather/search/?p=" + location[0]
-            print(url)
             r = requests.get(url)
             soup = BeautifulSoup(r.text, 'html.parser')
             content = soup.find(class_="serch-table")
             # 2回目のスクレイピングで用いるURLを得る
             location_url = "http:" + content.find('a').get('href')
-            print(location_url)
             r = requests.get(location_url)
             soup = BeautifulSoup(r.text, 'html.parser')
             content = soup.find(id='yjw_pinpoint_today').find_all('td')
             info = []
-            print(info)
 
             for each in content[1:]:
                 info.append(each.get_text().strip('\n'))
+
+            print(info)
 
             # 時間
             time = info[:8]
@@ -94,8 +93,29 @@ class CallbackView(View):
             # 上の3つの情報を合わせる
             weather_info = [(time[i], weather[i], temperature[i]) for i in range(8)]
 
-            result_info = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(8)]
-            result = ('{}\nの今日の天気は\n'.format(original_location) + '\n'.join(result_info) + '\nです。')
+            # 絵文字変換
+            weather_info \
+                .replace('晴れ', '\uDBC0\uDCA9') \
+                .replace('曇り', '\uDBC0\uDCAC') \
+                .replace('雨', '\uDBC0\uDCAA') \
+                .replace('大雨', '\uDBC0\uDCAA') \
+                .replace('暴風雨', '\uDBC0\uDCAA') \
+                .replace('雪', '\uDBC0\uDCA9') \
+                .replace('大雪', '\uDBC0\uDCA9') \
+                .replace('暴風雪', '\uDBC0\uDCA9') \
+
+
+            result_info = [('{0[0]} {0[1]} / {0[2]}°C'.format(weather_info[i])) for i in range(8)]
+            print(result_info)
+
+
+
+            context = {
+                'original_location': original_location,
+                'result_info': result_info,
+            }
+
+            result = render_to_string('blog/text_template/today_weather.txt', context)
 
             return result
 
