@@ -91,8 +91,12 @@ class CallbackView(View):
             # 上の3つの情報を合わせる
             weather_info = [(time[i], weather[i], temperature[i]) for i in range(8)]
 
+            result_info = [('{0[0]}　{0[1]} / {0[2]}°C'.format(weather_info[i])) for i in range(8)]
+            today_weather = '\n'.join(result_info)
+            print(today_weather)
+
             # 時間表記
-            weather_info.replace('0時', '00:00～')\
+            today_weather.replace('0時', '00:00～')\
                 .replace('3時', '03:00～')\
                 .replace('6時', '06:00～')\
                 .replace('9時', '09:00～')\
@@ -102,7 +106,7 @@ class CallbackView(View):
                 .replace('21時', '21:00～')
 
             # 絵文字変換
-            weather_info.replace('晴れ', '\uDBC0\uDCA9')\
+            today_weather.replace('晴れ', '\uDBC0\uDCA9')\
                 .replace('曇り', '\uDBC0\uDCAC')\
                 .replace('雨', '\uDBC0\uDCAA')\
                 .replace('大雨', '\uDBC0\uDCAA')\
@@ -112,14 +116,9 @@ class CallbackView(View):
                 .replace('暴風雪', '\uDBC0\uDCA9')
 
 
-            result_info = [('{0[0]}　{0[1]} / {0[2]}°C'.format(weather_info[i])) for i in range(8)]
-            print(result_info)
-
-
-
             context = {
                 'original_location': original_location,
-                'result_info': result_info,
+                'today_weather': today_weather,
             }
 
             result = render_to_string('blog/text_template/today_weather.txt', context)

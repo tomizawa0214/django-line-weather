@@ -1,5 +1,5 @@
 -----今日の天気-----
-{{ result_info }}
+{{ today_weather }}
 
 
 ▼現在地
