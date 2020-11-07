@@ -92,11 +92,26 @@ class CallbackView(View):
             weather_info = [(time[i], weather[i], temperature[i]) for i in range(8)]
 
             result_info = [('{0[0]}　{0[1]} {0[2]}°C'.format(weather_info[i])) for i in range(8)]
-            te_result = '\n'.join(result_info)
+            today_weather = '\n'.join(result_info)
 
             # 表記変更
-            today_weather = te_result.replace('0時', '00:00～').replace('3時', '03:00～').replace('6時', '06:00～').replace('9時', '09:00～').replace('12時', '12:00～').replace('15時', '15:00～').replace('18時', '18:00～').replace('21時', '21:00～').replace('晴れ', '\uDBC0\uDCA9').replace('曇り', '\uDBC0\uDCAC').replace('雨', '\uDBC0\uDCAA').replace('大雨', '\uDBC0\uDCAA').replace('暴風雨', '\uDBC0\uDCAA').replace('雪', '\uDBC0\uDCA9').replace('大雪', '\uDBC0\uDCA9').replace('暴風雪', '\uDBC0\uDCA9')
-            print(today_weather)
+            today_weather = today_weather\
+                .replace('0時', '00:00～')\
+                .replace('3時', '03:00～')\
+                .replace('6時', '06:00～')\
+                .replace('9時', '09:00～')\
+                .replace('12時', '12:00～')\
+                .replace('15時', '15:00～')\
+                .replace('18時', '18:00～')\
+                .replace('21時', '21:00～')\
+                .replace('晴れ', '☀')\
+                .replace('曇り', '☁')\
+                .replace('雨', '🌧')\
+                .replace('大雨', '☔')\
+                .replace('暴風雨', '☔🌀')\
+                .replace('雪', '❄')\
+                .replace('大雪', '☃')\
+                .replace('暴風雪', '☃🌀')
 
             context = {
                 'original_location': original_location,
