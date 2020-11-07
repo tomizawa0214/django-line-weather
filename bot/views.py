@@ -50,7 +50,7 @@ class CallbackView(View):
     @handler.add(MessageEvent, message=TextMessage)
     def handle_message(event):
         text = event.message.text
-        if '位置情報' in text or '明日' in text or '翌日' in text or '天気' in text:
+        if '現在地' in text:
             line_bot_api.reply_message(
                 event.reply_token,
                 [
@@ -82,8 +82,6 @@ class CallbackView(View):
             for each in content[1:]:
                 info.append(each.get_text().strip('\n'))
 
-            print(info)
-
             # 時間
             time = info[:8]
             # 天気
@@ -93,19 +91,28 @@ class CallbackView(View):
             # 上の3つの情報を合わせる
             weather_info = [(time[i], weather[i], temperature[i]) for i in range(8)]
 
+            # 時間表記
+            weather_info.replace('0時', '00:00～')\
+                .replace('3時', '03:00～')\
+                .replace('6時', '06:00～')\
+                .replace('9時', '09:00～')\
+                .replace('12時', '12:00～')\
+                .replace('15時', '15:00～')\
+                .replace('18時', '18:00～')\
+                .replace('21時', '21:00～')
+
             # 絵文字変換
-            weather_info \
-                .replace('晴れ', '\uDBC0\uDCA9') \
-                .replace('曇り', '\uDBC0\uDCAC') \
-                .replace('雨', '\uDBC0\uDCAA') \
-                .replace('大雨', '\uDBC0\uDCAA') \
-                .replace('暴風雨', '\uDBC0\uDCAA') \
-                .replace('雪', '\uDBC0\uDCA9') \
-                .replace('大雪', '\uDBC0\uDCA9') \
-                .replace('暴風雪', '\uDBC0\uDCA9') \
+            weather_info.replace('晴れ', '\uDBC0\uDCA9')\
+                .replace('曇り', '\uDBC0\uDCAC')\
+                .replace('雨', '\uDBC0\uDCAA')\
+                .replace('大雨', '\uDBC0\uDCAA')\
+                .replace('暴風雨', '\uDBC0\uDCAA')\
+                .replace('雪', '\uDBC0\uDCA9')\
+                .replace('大雪', '\uDBC0\uDCA9')\
+                .replace('暴風雪', '\uDBC0\uDCA9')
 
 
-            result_info = [('{0[0]} {0[1]} / {0[2]}°C'.format(weather_info[i])) for i in range(8)]
+            result_info = [('{0[0]}　{0[1]} / {0[2]}°C'.format(weather_info[i])) for i in range(8)]
             print(result_info)
 
 
