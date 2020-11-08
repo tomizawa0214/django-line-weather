@@ -11,13 +11,13 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 r = requests.get('https://weather.tsukumijima.net/api/forecast/city/100010')
 r_data = r.json()
 d = r_data['forecasts']
-maebashi = d[1]['image']['title']
-h_temperature = d[1]['temperature']['max']['celsius']
-l_temperature = d[1]['temperature']['min']['celsius']
-rainy_percent_0 = d[1]['chanceOfRain']['00-06']
-rainy_percent_6 = d[1]['chanceOfRain']['06-12']
-rainy_percent_12 = d[1]['chanceOfRain']['12-18']
-rainy_percent_18 = d[1]['chanceOfRain']['18-24']
+maebashi = d[0]['image']['url']
+h_temperature = d[0]['temperature']['max']['celsius']
+l_temperature = d[0]['temperature']['min']['celsius']
+rainy_percent_0 = d[0]['chanceOfRain']['00-06']
+rainy_percent_6 = d[0]['chanceOfRain']['06-12']
+rainy_percent_12 = d[0]['chanceOfRain']['12-18']
+rainy_percent_18 = d[0]['chanceOfRain']['18-24']
 
 result = '-----前橋市の明日の天気-----\n'\
     + str(maebashi) + '\n' \
