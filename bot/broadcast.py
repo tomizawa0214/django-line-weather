@@ -2,6 +2,7 @@ from django.template.loader import render_to_string
 from linebot import LineBotApi
 from linebot.models import TextSendMessage
 import os
+import requests
 
 
 CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
