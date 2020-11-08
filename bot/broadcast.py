@@ -19,19 +19,18 @@ rainy_percent_6 = d[1]['chanceOfRain']['06-12']
 rainy_percent_12 = d[1]['chanceOfRain']['12-18']
 rainy_percent_18 = d[1]['chanceOfRain']['18-24']
 
-context = {
-    'r': r,
-    'r_data': r_data,
-    'd': d,
-    'maebashi': maebashi,
-    'h_temperature': h_temperature,
-    'l_temperature': l_temperature,
-    'rainy_percent_0': rainy_percent_0,
-    'rainy_percent_6': rainy_percent_6,
-    'rainy_percent_12': rainy_percent_12,
-    'rainy_percent_18': rainy_percent_18
-}
+result = '-----前橋市の明日の天気-----\n'\
+    + str(maebashi) \
+    + '--------------------\n' \
+    + '▼気温\n' 
+    + '最高  ' + str(h_temperature) + '℃\n' \
+    + '最低　' + str(l_temperature } + '℃\n' \
+    + '--------------------\n' \
+    + '▼降水確率\n' \
+    + '00:00～06:00　' + str(rainy_percent_0) + '\n' \
+    + '06:00～12:00　' + str(rainy_percent_6) + '\n' \
+    + '12:00～18:00　' + str(rainy_percent_12) + '\n' \
+    + '18:00～24:00　' + str(rainy_percent_18)
 
-result = render_to_string('blog/text_template/weather.txt', context)
 messages = TextSendMessage(text=result)
 line_bot_api.broadcast(messages=messages)
