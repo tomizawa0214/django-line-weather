@@ -5,3 +5,6 @@
 
 ▼現在地
 {{ original_location }}
+
+引用：Yahoo!天気
+{{ location_url }}

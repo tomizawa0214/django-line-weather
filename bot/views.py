@@ -116,6 +116,7 @@ class CallbackView(View):
             context = {
                 'original_location': original_location,
                 'today_weather': today_weather,
+                'location_url': location_url,
             }
 
             result = render_to_string('blog/text_template/today_weather.txt', context)
