@@ -47,18 +47,6 @@ class CallbackView(View):
         return super(CallbackView, self).dispatch(*args, **kwargs)
 
     @staticmethod
-    @handler.add(MessageEvent, message=TextMessage)
-    def handle_message(event):
-        text = event.message.text
-        if '現在地' in text:
-            line_bot_api.reply_message(
-                event.reply_token,
-                [
-                    TextSendMessage(text='以下のURLから現在地を教えてくださいな\uDBC0\uDC2F'),
-                    TextSendMessage(text='https://line.me/R/nv/location/')
-                ]
-            )
-
     @handler.add(MessageEvent, message=LocationMessage)
     def handle_location(event):
         text = event.message.address
