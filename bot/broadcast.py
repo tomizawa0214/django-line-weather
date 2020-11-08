@@ -20,11 +20,11 @@ rainy_percent_12 = d[1]['chanceOfRain']['12-18']
 rainy_percent_18 = d[1]['chanceOfRain']['18-24']
 
 result = '-----前橋市の明日の天気-----\n'\
-    + str(maebashi) \
+    + str(maebashi) + '\n' \
     + '--------------------\n' \
     + '▼気温\n' \
     + '最高  ' + str(h_temperature) + '℃\n' \
-    + '最低　' + str(l_temperature } + '℃\n' \
+    + '最低　' + str(l_temperature) + '℃\n' \
     + '--------------------\n' \
     + '▼降水確率\n' \
     + '00:00～06:00　' + str(rainy_percent_0) + '\n' \
