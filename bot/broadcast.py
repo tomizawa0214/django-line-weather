@@ -3,6 +3,8 @@ from linebot import LineBotApi
 from linebot.models import TextSendMessage, FlexSendMessage
 import os
 import requests
+import datetime
+import locale
 
 
 # CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
@@ -21,6 +23,11 @@ rainy_percent_6 = d[1]['chanceOfRain']['06-12']
 rainy_percent_12 = d[1]['chanceOfRain']['12-18']
 rainy_percent_18 = d[1]['chanceOfRain']['18-24']
 
+# 明日を取得
+locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
+tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
+jp_tomorrow = str(tomorrow.month) + '/' + str(tomorrow.day) + '(' + str(tomorrow.strftime('%a')) + ')'
+
 info = {
     "type": "flex",
     "altText": "明日の天気は、" + str(maebashi_weather),
@@ -32,12 +39,11 @@ info = {
             "contents": [
                 {
                     "type": "text",
-                    "text": "明日の前橋市の天気",
+                    "text": str(jp_tomorrow) + "の前橋市の天気",
                     "weight": "bold",
                     "size": "xl",
-                    "color": "#457703",
+                    "color": "#457703FF",
                     "align": "center",
-                    "gravity": "center",
                     "contents": []
                 }
             ]
@@ -45,9 +51,9 @@ info = {
         "hero": {
             "type": "image",
             "url": maebashi,
-            "size": "md",
+            "size": "lg",
             "aspectRatio": "20:13",
-            "aspectMode": "cover",
+            "aspectMode": "fit",
             "action": {
                 "type": "uri",
                 "label": "Action",
@@ -56,110 +62,151 @@ info = {
         },
         "body": {
             "type": "box",
-            "layout": "horizontal",
+            "layout": "vertical",
             "spacing": "md",
             "contents": [
                 {
+                    "type": "text",
+                    "text": "気温",
+                    "weight": "bold",
+                    "contents": []
+                },
+                {
+                    "type": "separator",
+                    "margin": "xs"
+                },
+                {
                     "type": "box",
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "flex": 1,
+                    "paddingBottom": "10px",
                     "contents": [
                         {
                             "type": "text",
-                            "text": "気温",
-                            "weight": "bold",
+                            "text": "hello, world",
+                            "contents": [
+                                {
+                                    "type": "span",
+                                    "text": "最高　"
+                                },
+                                {
+                                    "type": "span",
+                                    "text": str(h_temperature) + "℃",
+                                    "size": "xl",
+                                    "color": "#FF0000"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "text": "hello, world",
+                            "contents": [
+                                {
+                                    "type": "span",
+                                    "text": "最低　"
+                                },
+                                {
+                                    "type": "span",
+                                    "text": str(l_temperature) + "℃",
+                                    "size": "xl",
+                                    "color": "#0096FF"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "text": "降水確率",
+                    "weight": "bold",
+                    "margin": "xxl",
+                    "contents": []
+                },
+                {
+                    "type": "separator",
+                    "margin": "xs"
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "flex": 2,
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "0:00 - 6:00",
                             "flex": 1,
-                            "align": "start",
                             "gravity": "center",
                             "contents": []
                         },
                         {
-                            "type": "separator"
-                        },
-                        {
                             "type": "text",
-                            "text": "最高　" + str(h_temperature) + "℃　/　最低　" + str(l_temperature) + "℃",
-                            "flex": 1,
+                            "text": rainy_percent_0,
+                            "size": "xl",
+                            "flex": 2,
+                            "align": "end",
                             "gravity": "center",
-                            "offsetTop": "5px",
+                            "offsetEnd": "70px",
+                            "contents": []
+                        }
+                    ]
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "6:00 - 12:00",
+                            "gravity": "center",
                             "contents": []
                         },
                         {
                             "type": "text",
-                            "text": "降水確率",
-                            "weight": "bold",
-                            "flex": 1,
-                            "gravity": "bottom",
-                            "margin": "xxl",
+                            "text": rainy_percent_6,
+                            "size": "xl",
+                            "align": "end",
+                            "offsetEnd": "70px",
+                            "contents": []
+                        }
+                    ]
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "12:00 - 18:00",
+                            "gravity": "center",
                             "contents": []
                         },
                         {
-                            "type": "separator"
+                            "type": "text",
+                            "text": rainy_percent_12,
+                            "size": "xl",
+                            "align": "end",
+                            "offsetEnd": "70px",
+                            "contents": []
+                        }
+                    ]
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "18:00 - 24:00",
+                            "gravity": "center",
+                            "contents": []
                         },
                         {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "paddingTop": "5px",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "0:00～6:00",
-                                    "contents": []
-                                },
-                                {
-                                    "type": "text",
-                                    "text": rainy_percent_0,
-                                    "contents": []
-                                }
-                            ]
-                        },
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "6:00～12:00",
-                                    "contents": []
-                                },
-                                {
-                                    "type": "text",
-                                    "text": rainy_percent_6,
-                                    "contents": []
-                                }
-                            ]
-                        },
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "12:00～18:00",
-                                    "contents": []
-                                },
-                                {
-                                    "type": "text",
-                                    "text": rainy_percent_12,
-                                    "contents": []
-                                }
-                            ]
-                        },
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "18:00～24:00",
-                                    "contents": []
-                                },
-                                {
-                                    "type": "text",
-                                    "text": rainy_percent_18,
-                                    "contents": []
-                                }
-                            ]
+                            "type": "text",
+                            "text": rainy_percent_18,
+                            "size": "xl",
+                            "align": "end",
+                            "offsetEnd": "70px",
+                            "contents": []
                         }
                     ]
                 }
