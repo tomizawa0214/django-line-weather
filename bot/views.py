@@ -69,50 +69,361 @@ class CallbackView(View):
 
             for each in content[1:]:
                 info.append(each.get_text().strip('\n'))
+                
+            # 絵文字変換
+            for i in range(9, 17):
+                info[i] = info[i]\
+                    .replace('晴れ', '☀')\
+                    .replace('曇り', '☁')\
+                    .replace('雨', '🌧')\
+                    .replace('大雨', '☔')\
+                    .replace('暴風雨', '☔🌀')\
+                    .replace('雪', '❄')\
+                    .replace('大雪', '☃')\
+                    .replace('暴風雪', '☃🌀')
 
-            # 時間
-            time = info[:8]
-            # 天気
-            weather = info[9:17]
-            # 気温
-            temperature = info[18:26]
-            # 上の3つの情報を合わせる
-            weather_info = [(time[i], weather[i], temperature[i]) for i in range(8)]
-
-            result_info = [('{0[0]}　{0[1]} {0[2]}°C'.format(weather_info[i])) for i in range(8)]
-            today_weather = '\n'.join(result_info)
-
-            # 表記変更
-            today_weather = today_weather\
-                .replace('0時', '00:00～')\
-                .replace('3時', '03:00～')\
-                .replace('6時', '06:00～')\
-                .replace('9時', '09:00～')\
-                .replace('12時', '12:00～')\
-                .replace('15時', '15:00～')\
-                .replace('18時', '18:00～')\
-                .replace('21時', '21:00～')\
-                .replace('晴れ', '☀')\
-                .replace('曇り', '☁')\
-                .replace('雨', '🌧')\
-                .replace('大雨', '☔')\
-                .replace('暴風雨', '☔🌀')\
-                .replace('雪', '❄')\
-                .replace('大雪', '☃')\
-                .replace('暴風雪', '☃🌀')
-
-            context = {
-                'original_location': original_location,
-                'today_weather': today_weather,
-                'location_url': location_url,
+            message = {
+                "type": "flex",
+                "altText": "目的地の時間帯天気",
+                "contents": {
+                    "type": "bubble",
+                    "direction": "ltr",
+                    "header": {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "目的地の今日の天気",
+                                "weight": "bold",
+                                "size": "xl",
+                                "color": "#1DCD00",
+                                "align": "center",
+                                "contents": []
+                            }
+                        ]
+                    },
+                    "body": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "spacing": "none",
+                        "contents": [
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "0:00～",
+                                        "flex": 1,
+                                        "align": "start",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[9],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[18]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "margin": "xs",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "3:00～",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[10],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[19]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "6:00～",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[11],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[20]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "9:00～",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[12],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[21]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "12:00～",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[13],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[22]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "15:00～",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[14],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[23]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "18:00～",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[15],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[24]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "box",
+                                "layout": "horizontal",
+                                "contents": [
+                                    {
+                                        "type": "text",
+                                        "text": "21:00～",
+                                        "gravity": "center",
+                                        "contents": []
+                                    },
+                                    {
+                                        "type": "box",
+                                        "layout": "horizontal",
+                                        "contents": [
+                                            {
+                                                "type": "text",
+                                                "text": info[16],
+                                                "size": "xl",
+                                                "contents": []
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": str(info[25]) + "℃",
+                                                "weight": "bold",
+                                                "size": "lg",
+                                                "align": "end",
+                                                "gravity": "center",
+                                                "contents": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "footer": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "目的地",
+                                "weight": "bold",
+                                "size": "xs",
+                                "align": "start",
+                                "margin": "md",
+                                "contents": []
+                            },
+                            {
+                                "type": "separator",
+                                "margin": "xs"
+                            },
+                            {
+                                "type": "text",
+                                "text": original_location[14:],
+                                "size": "xxs",
+                                "margin": "md",
+                                "contents": []
+                            },
+                            {
+                                "type": "text",
+                                "text": "引用：Yahoo!天気",
+                                "size": "xxs",
+                                "margin": "xxl",
+                                "contents": []
+                            },
+                            {
+                                "type": "text",
+                                "text": location_url,
+                                "size": "xxs",
+                                "contents": []
+                            }
+                        ]
+                    }
+                }
             }
 
-            result = render_to_string('blog/text_template/today_weather.txt', context)
+            return message
 
-            return result
-
-        result = get_weather_from_location(text)
+        info = get_weather_from_location(text)
+        result = FlexSendMessage.new_from_json_dict(info)
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=result)
+            message=result
         )

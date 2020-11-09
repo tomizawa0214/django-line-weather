@@ -7,9 +7,8 @@ import datetime
 import locale
 
 
-# CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
-# line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
-line_bot_api = LineBotApi("h9YGQlME9/AcSC/4o1Fwu3XJciHDE0rkkl/mXdORClMYCgwC90e4RhdePogIE4+gl/hw5StOvSO7/GoWQ5V/kJJc5o3/gs9L3TDxywcKPZwXB2CVM/e1G42yc6SjAxSm6Erar5TCVQeTEE8yaulhJgdB04t89/1O/w1cDnyilFU=")
+CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
+line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 
 r = requests.get('https://weather.tsukumijima.net/api/forecast/city/100010')
 r_data = r.json()
