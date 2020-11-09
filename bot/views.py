@@ -397,7 +397,7 @@ class CallbackView(View):
                             },
                             {
                                 "type": "text",
-                                "text": original_location[14:],
+                                "text": original_location[13:],
                                 "size": "xxs",
                                 "margin": "md",
                                 "contents": []
@@ -408,12 +408,6 @@ class CallbackView(View):
                                 "size": "xxs",
                                 "margin": "xxl",
                                 "contents": []
-                            },
-                            {
-                                "type": "text",
-                                "text": location_url,
-                                "size": "xxs",
-                                "contents": []
                             }
                         ]
                     }
@@ -423,9 +417,7 @@ class CallbackView(View):
             return message
 
         info = get_weather_from_location(text)
-        print(info)
         result = FlexSendMessage.new_from_json_dict(info)
-        print(result)
         line_bot_api.reply_message(
             event.reply_token,
             messages=result
