@@ -423,7 +423,9 @@ class CallbackView(View):
             return message
 
         info = get_weather_from_location(text)
+        print(info)
         result = FlexSendMessage.new_from_json_dict(info)
+        print(result)
         line_bot_api.reply_message(
             event.reply_token,
             message=result
