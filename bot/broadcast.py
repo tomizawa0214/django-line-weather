@@ -22,11 +22,6 @@ rainy_percent_6 = d[1]['chanceOfRain']['06-12']
 rainy_percent_12 = d[1]['chanceOfRain']['12-18']
 rainy_percent_18 = d[1]['chanceOfRain']['18-24']
 
-# 明日を取得
-locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
-tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
-jp_tomorrow = str(tomorrow.month) + '/' + str(tomorrow.day) + '(' + str(tomorrow.strftime('%a')) + ')'
-
 info = {
     "type": "flex",
     "altText": "明日の天気は、" + str(maebashi_weather),
@@ -38,7 +33,7 @@ info = {
             "contents": [
                 {
                     "type": "text",
-                    "text": str(jp_tomorrow) + "の前橋市の天気",
+                    "text": "明日の前橋市の天気",
                     "weight": "bold",
                     "size": "xl",
                     "color": "#457703FF",
