@@ -397,7 +397,7 @@ class CallbackView(View):
                             },
                             {
                                 "type": "text",
-                                "text": original_location[13:],
+                                "text": original_location,
                                 "size": "xxs",
                                 "margin": "md",
                                 "contents": []
