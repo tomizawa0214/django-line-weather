@@ -65,7 +65,10 @@ class CallbackView(View):
             location_url = "http:" + content.find('a').get('href')
             r = requests.get(location_url)
             soup = BeautifulSoup(r.text, 'html.parser')
+            # 今日の天気を取得
             content = soup.find(id='yjw_pinpoint_today').find_all('td')
+            # 明日の天気を取得
+            # content_t = soup.find(id='yjw_pinpoint_tomorrow').find_all('td')
             info = []
 
             for each in content[1:]:
