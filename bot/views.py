@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup
 import requests
 import os
 import re
+import datetime
 
 
 CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
@@ -418,6 +419,34 @@ class CallbackView(View):
             }
 
             return message
+
+            # # 現在時刻を取得
+            # dt_now = datetime.datetime.now()
+
+            # # 0:00～2:59
+            # if 0 < dt_now.hour < 3:
+            #     return message_3
+            # # 3:00～5:59
+            # else if 3 <= dt_now.hour < 6:
+            #     return message_6
+            # # 6:00～8:59
+            # else if 6 <= dt_now.hour < 9:
+            #     return message_9
+            # # 9:00～11:59
+            # else if 9 <= dt_now.hour < 12:
+            #     return message_12
+            # # 12:00～14:59
+            # else if 12 <= dt_now.hour < 15:
+            #     return message_15
+            # # 15:00～17:59
+            # else if 15 <= dt_now.hour < 18:
+            #     return message_18
+            # # 18:00～20:59
+            # else if 18 <= dt_now.hour < 21:
+            #     return message_21
+            # # 21:00～23:59
+            # else if 21 <= dt_now.hour <= 23:
+            #     return message_23
 
         info = get_weather_from_location(text)
         result = FlexSendMessage.new_from_json_dict(info)
