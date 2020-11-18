@@ -2751,25 +2751,25 @@ class CallbackView(View):
             if 0 < dt.hour+9 < 3:
                 return message_3
             # 3:00～5:59
-            else if 3 <= dt.hour+9 < 6:
+            elif 3 <= dt.hour+9 < 6:
                 return message_6
             # 6:00～8:59
-            else if 6 <= dt.hour+9 < 9:
+            elif 6 <= dt.hour+9 < 9:
                 return message_9
             # 9:00～11:59
-            else if 9 <= dt.hour+9 < 12:
+            elif 9 <= dt.hour+9 < 12:
                 return message_12
             # 12:00～14:59
-            else if 12 <= dt.hour+9 < 15:
+            elif 12 <= dt.hour+9 < 15:
                 return message_15
             # 15:00～17:59
-            else if 15 <= dt.hour+9 < 18:
+            elif 15 <= dt.hour+9 < 18:
                 return message_18
             # 18:00～20:59
-            else if 18 <= dt.hour+9 < 21:
+            elif 18 <= dt.hour+9 < 21:
                 return message_21
             # 21:00～23:59
-            else if 21 <= dt.hour+9 <= 23:
+            elif 21 <= dt.hour+9 <= 23:
                 return message_23
 
         weather = get_weather_from_location(text)
