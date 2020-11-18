@@ -2747,29 +2747,29 @@ class CallbackView(View):
                 }
             }
 
-            # 0:00～2:59
-            if 0 < dt.hour+9 < 3:
+            # 日本時間0:00～2:59
+            if 15 < dt.hour < 18:
                 return message_3
-            # 3:00～5:59
-            elif 3 <= dt.hour+9 < 6:
+            # 日本時間3:00～5:59
+            elif 18 <= dt.hour < 21:
                 return message_6
-            # 6:00～8:59
-            elif 6 <= dt.hour+9 < 9:
+            # 日本時間6:00～8:59
+            elif 21 <= dt.hour < 24:
                 return message_9
-            # 9:00～11:59
-            elif 9 <= dt.hour+9 < 12:
+            # 日本時間9:00～11:59
+            elif 0 <= dt.hour < 3:
                 return message_12
-            # 12:00～14:59
-            elif 12 <= dt.hour+9 < 15:
+            # 日本時間12:00～14:59
+            elif 3 <= dt.hour < 6:
                 return message_15
-            # 15:00～17:59
-            elif 15 <= dt.hour+9 < 18:
+            # 日本時間15:00～17:59
+            elif 6 <= dt.hour < 9:
                 return message_18
-            # 18:00～20:59
-            elif 18 <= dt.hour+9 < 21:
+            # 日本時間18:00～20:59
+            elif 9 <= dt.hour < 12:
                 return message_21
-            # 21:00～23:59
-            elif 21 <= dt.hour+9 <= 23:
+            # 日本時間21:00～23:59
+            elif 13 <= dt.hour <= 14:
                 return message_23
 
         weather = get_weather_from_location(text)
