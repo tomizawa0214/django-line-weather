@@ -120,6 +120,11 @@ STATIC_URL = '/static/'
 
 django_heroku.settings(locals())
 
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
 if not DEBUG:
     import django_heroku
     django_heroku.settings(locals())
