@@ -214,7 +214,7 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 r = requests.get("https://weather.yahoo.co.jp/weather/jp/10/4210/10202.html")
 soup = BeautifulSoup(r.text, 'html.parser')
 content = soup.find(id='yjw_pinpoint_tomorrow').find_all('td')
-info = [each.get_text().strip('\n') for each in content_t[1:]]
+info = [each.get_text().strip('\n') for each in content[1:]]
 
 # 絵文字変換
 for i in range(9, 17):
