@@ -230,7 +230,7 @@ for i in range(9, 17):
 
 message = {
     "type": "flex",
-    "altText": "目的地の時間帯天気をお知らせします！",
+    "altText": "高崎市の明日の天気をお知らせします！",
     "contents": {
         "type": "bubble",
         "direction": "ltr",
