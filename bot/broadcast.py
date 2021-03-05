@@ -7,8 +7,8 @@ import datetime
 import locale
 # from bs4 import BeautifulSoup
 
-# CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
-# line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
+CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
+line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 
 r = requests.get('https://weather.tsukumijima.net/api/forecast/city/100010')
 r_data = r.json()
