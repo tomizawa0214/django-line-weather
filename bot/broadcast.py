@@ -5,11 +5,10 @@ import os
 import requests
 import datetime
 import locale
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 
-
-CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
-line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
+# CHANNEL_ACCESS_TOKEN = os.environ["CHANNEL_ACCESS_TOKEN"]
+# line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 
 r = requests.get('https://weather.tsukumijima.net/api/forecast/city/100010')
 r_data = r.json()
@@ -18,10 +17,10 @@ maebashi = d[1]['image']['url']
 maebashi_weather = d[1]['image']['title']
 h_temperature = d[1]['temperature']['max']['celsius']
 l_temperature = d[1]['temperature']['min']['celsius']
-rainy_percent_0 = d[1]['chanceOfRain']['T00-06']
-rainy_percent_6 = d[1]['chanceOfRain']['T06-12']
-rainy_percent_12 = d[1]['chanceOfRain']['T12-18']
-rainy_percent_18 = d[1]['chanceOfRain']['T18-24']
+rainy_percent_0 = d[1]['chanceOfRain']['T00_06']
+rainy_percent_6 = d[1]['chanceOfRain']['T06_12']
+rainy_percent_12 = d[1]['chanceOfRain']['T12_18']
+rainy_percent_18 = d[1]['chanceOfRain']['T18_24']
 
 info = {
     "type": "flex",
@@ -30,31 +29,40 @@ info = {
         "type": "bubble",
         "header": {
             "type": "box",
-            "layout": "horizontal",
+            "layout": "vertical",
             "contents": [
                 {
                     "type": "text",
-                    "text": "明日の前橋市の天気",
+                    "text": "【群馬県南部】明日の天気",
                     "weight": "bold",
-                    "size": "xl",
+                    "size": "lg",
                     "color": "#457703FF",
                     "align": "center",
+                    "contents": []
+                },
+                {
+                    "type": "text",
+                    "text": maebashi_weather,
+                    "weight": "bold",
+                    "size": "xl",
+                    "align": "center",
+                    "margin": "xxl",
                     "contents": []
                 }
             ]
         },
-        "hero": {
-            "type": "image",
-            "url": maebashi,
-            "size": "lg",
-            "aspectRatio": "20:13",
-            "aspectMode": "fit",
-            "action": {
-                "type": "uri",
-                "label": "Action",
-                "uri": "https://linecorp.com/"
-            }
-        },
+        # "hero": {
+        #     "type": "image",
+        #     "url": "https://www.jma.go.jp/bosai/forecast/img/210.svg",
+        #     "size": "3xl",
+        #     "aspectRatio": "20:13",
+        #     "aspectMode": "cover",
+        #     "action": {
+        #         "type": "uri",
+        #         "label": "Action",
+        #         "uri": "https://linecorp.com/"
+        #     }
+        # },
         "body": {
             "type": "box",
             "layout": "vertical",
@@ -538,7 +546,7 @@ info = {
 #         }
 #     }
 # }
-
 # result = FlexSendMessage.new_from_json_dict(message)
+
 result = FlexSendMessage.new_from_json_dict(info)
 line_bot_api.broadcast(messages=result)
