@@ -13,7 +13,7 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 r = requests.get('https://weather.tsukumijima.net/api/forecast/city/100010')
 r_data = r.json()
 d = r_data['forecasts']
-maebashi = d[1]['image']['url']
+# maebashi = d[1]['image']['url']
 maebashi_weather = d[1]['image']['title']
 h_temperature = d[1]['temperature']['max']['celsius']
 l_temperature = d[1]['temperature']['min']['celsius']
@@ -21,6 +21,30 @@ rainy_percent_0 = d[1]['chanceOfRain']['T00_06']
 rainy_percent_6 = d[1]['chanceOfRain']['T06_12']
 rainy_percent_12 = d[1]['chanceOfRain']['T12_18']
 rainy_percent_18 = d[1]['chanceOfRain']['T18_24']
+
+# 天気アイコン変換
+if maebashi_weather == '雨':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029145/img/%E9%9B%A8_rewwsv.png'
+elif maebashi_weather == '晴のち曇':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%99%B4%E3%81%AE%E3%81%A1%E6%9B%87_unbqde.png'
+elif maebashi_weather == '晴れ':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%99%B4%E3%82%8C_byvvxp.png'
+elif maebashi_weather == '晴時々曇':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%99%B4%E6%99%82%E3%80%85%E6%9B%87_x9bwrx.png'
+elif maebashi_weather == '曇のち雨':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%9B%87%E3%81%AE%E3%81%A1%E9%9B%A8_v1pfih.png'
+elif maebashi_weather == '曇のち晴':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%9B%87%E3%81%AE%E3%81%A1%E6%99%B4_mk3pyp.png'
+elif maebashi_weather == '曇り':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%9B%87%E3%82%8A_at0ohh.png'
+elif maebashi_weather == '曇一時雪か雨':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029145/img/%E6%9B%87%E4%B8%80%E6%99%82%E9%9B%AA%E3%81%8B%E9%9B%A8_azpu1g.png'
+elif maebashi_weather == '曇時々雨' or maebashi_weather == '曇一時雨':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029145/img/%E6%9B%87%E6%99%82%E3%80%85%E9%9B%A8_%E6%9B%87%E4%B8%80%E6%99%82%E9%9B%A8_pzeus2.png'
+elif maebashi_weather == '曇時々晴':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029145/img/%E6%9B%87%E6%99%82%E3%80%85%E6%99%B4_p1ojvf.png'
+else:
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029754/img/unknown_labwrp.png' 
 
 info = {
     "type": "flex",
@@ -40,34 +64,34 @@ info = {
                     "align": "center",
                     "contents": []
                 },
-                {
-                    "type": "text",
-                    "text": maebashi_weather,
-                    "weight": "bold",
-                    "size": "xl",
-                    "align": "center",
-                    "margin": "xxl",
-                    "contents": []
-                }
             ]
         },
-        # "hero": {
-        #     "type": "image",
-        #     "url": "https://www.jma.go.jp/bosai/forecast/img/210.svg",
-        #     "size": "3xl",
-        #     "aspectRatio": "20:13",
-        #     "aspectMode": "cover",
-        #     "action": {
-        #         "type": "uri",
-        #         "label": "Action",
-        #         "uri": "https://linecorp.com/"
-        #     }
-        # },
+        "hero": {
+            "type": "image",
+            "url": maebashi,
+            "size": "3xl",
+            "aspectRatio": "20:13",
+            "aspectMode": "fit",
+            "action": {
+                "type": "uri",
+                "label": "Action",
+                "uri": "https://linecorp.com/"
+            }
+        },
         "body": {
             "type": "box",
             "layout": "vertical",
             "spacing": "md",
             "contents": [
+                {
+                    "type": "text",
+                    "text": maebashi_weather,
+                    "weight": "regular",
+                    "size": "xxs",
+                    "align": "center",
+                    "offsetBottom": "10px",
+                    "contents": []
+                },
                 {
                     "type": "text",
                     "text": "気温",
