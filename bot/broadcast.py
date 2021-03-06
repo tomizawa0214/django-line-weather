@@ -26,7 +26,7 @@ rainy_percent_18 = d[1]['chanceOfRain']['T18_24']
 if maebashi_weather == '雨':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029145/img/%E9%9B%A8_rewwsv.png'
 elif maebashi_weather == '晴のち曇':
-    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%99%B4%E3%81%AE%E3%81%A1%E6%9B%87_unbqde.png'
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615031768/img/%E6%99%B4%E3%81%AE%E3%81%A1%E6%9B%87_jekb0m.png'
 elif maebashi_weather == '晴れ':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615029144/img/%E6%99%B4%E3%82%8C_byvvxp.png'
 elif maebashi_weather == '晴時々曇':
