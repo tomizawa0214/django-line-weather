@@ -25,19 +25,25 @@ rainy_percent_18 = d[1]['chanceOfRain']['T18_24']
 # 天気アイコン変換
 if maebashi_weather == '雨':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088201/img/%E9%9B%A8_wfpdqn.png'
-elif maebashi_weather == '晴のち曇':
+elif maebashi_weather == '雨のち曇' or maebashi_weather == '雨のち時々曇':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088201/img/%E9%9B%A8%E3%81%AE%E3%81%A1%E6%9B%87_ta2nra.png'
+elif maebashi_weather == '晴のち雪か雨':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615089602/img/%E6%99%B4%E3%81%AE%E3%81%A1%E9%9B%AA%E3%81%8B%E9%9B%A8_f2dx8m.png'
+elif maebashi_weather == '晴のち曇' or maebashi_weather == '晴のち時々曇':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615031768/img/%E6%99%B4%E3%81%AE%E3%81%A1%E6%9B%87_jekb0m.png'
 elif maebashi_weather == '晴れ':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088202/img/%E6%99%B4%E3%82%8C_ea6cwo.png'
 elif maebashi_weather == '晴時々曇':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088202/img/%E6%99%B4%E6%99%82%E3%80%85%E6%9B%87_otwcrv.png'
-elif maebashi_weather == '曇のち雨':
+elif maebashi_weather == '雪のち曇':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615089602/img/%E9%9B%AA%E3%81%AE%E3%81%A1%E6%9B%87_meqogj.png'
+elif maebashi_weather == '曇のち雨' or maebashi_weather == '曇のち時々雨' or maebashi_weather == '曇のち一時雨':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088202/img/%E6%9B%87%E3%81%AE%E3%81%A1%E9%9B%A8_l2egmp.png'
-elif maebashi_weather == '曇のち晴':
+elif maebashi_weather == '曇のち晴' or maebashi_weather == '曇のち時々晴':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088202/img/%E6%9B%87%E3%81%AE%E3%81%A1%E6%99%B4_yfi0af.png'
 elif maebashi_weather == '曇り':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088202/img/%E6%9B%87%E3%82%8A_an6umh.png'
-elif maebashi_weather == '曇一時雪か雨':
+elif maebashi_weather == '曇一時雪か雨' or maebashi_weather == '曇時々雪':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088201/img/%E6%9B%87%E4%B8%80%E6%99%82%E9%9B%AA%E3%81%8B%E9%9B%A8_becexk.png'
 elif maebashi_weather == '曇時々雨' or maebashi_weather == '曇一時雨':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088201/img/%E6%9B%87%E6%99%82%E3%80%85%E9%9B%A8_%E6%9B%87%E4%B8%80%E6%99%82%E9%9B%A8_yeenry.png'
