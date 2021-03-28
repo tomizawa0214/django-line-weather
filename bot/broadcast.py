@@ -35,6 +35,8 @@ elif maebashi_weather == '晴のち曇' or maebashi_weather == '晴のち時々�
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615031768/img/%E6%99%B4%E3%81%AE%E3%81%A1%E6%9B%87_jekb0m.png'
 elif maebashi_weather == '晴れ':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088202/img/%E6%99%B4%E3%82%8C_ea6cwo.png'
+elif maebashi_weather == '晴一時雨':
+    maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1616960836/img/%E6%99%B4%E4%B8%80%E6%99%82%E9%9B%A8_pi7l6r.png'
 elif maebashi_weather == '晴時々曇':
     maebashi = 'https://res.cloudinary.com/dfnnruqnc/image/upload/v1615088202/img/%E6%99%B4%E6%99%82%E3%80%85%E6%9B%87_otwcrv.png'
 elif maebashi_weather == '雪のち曇':
